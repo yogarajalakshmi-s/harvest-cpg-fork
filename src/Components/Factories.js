@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const imagesContext = require.context("../assets", false, /\.(png|jpe?g|svg)$/);
+const imagesContext = require.context("../Assets", false, /\.(png|jpe?g|svg)$/);
 const allImages = imagesContext.keys().map(imagesContext);
 console.log("Loaded images:", allImages);
 

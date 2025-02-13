@@ -1,6 +1,5 @@
 // src/Components/Home.js
 import React from "react";
-import { Link } from "react-router-dom";
 import globeImage from "../Assets/globeharvest.png";
 import sourcingImage from "../Assets/sourcingImage.png";
 import manufacturingImage from "../Assets/manufacturingImage.png";
