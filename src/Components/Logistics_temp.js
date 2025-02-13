@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import shippingImage from "../Assets/shipping.png"; // Replace with your shipping image file
 import planeImage from "../Assets/plane.png";       // Replace with your plane image file
-import cardImage from "../Assets/smallCard.png";//Hi!
+import cardImage from "../Assets/smallCard.png";
 
 
 // -----------------------------
