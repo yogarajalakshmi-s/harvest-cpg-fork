@@ -1,16 +1,4 @@
-// src/FactoryData/factoriesData.js
-
-// Import images for factory 1
-//import factory1Img1 from "../assets/factory1_img1.png";
-//import factory1Img2 from "../assets/factory1_img2.png";
-//import factory1Img3 from "../assets/factory1_img3.png";
-//import factory1Img4 from "../assets/factory1_img4.png";
-
-// Import images for factory 2
-//import factory2Img1 from "../assets/factory2_img1.png";
-//import factory2Img2 from "../assets/factory2_img2.png";
-//import factory2Img3 from "../assets/factory2_img3.png";
-//import factory2Img4 from "../assets/factory2_img4.png";
+// factoriesData.js
 
 const placeholderImage1 = "https://via.placeholder.com/600x400?text=Factory+Image+1";
 const placeholderImage2 = "https://via.placeholder.com/600x400?text=Factory+Image+2";
@@ -21,22 +9,59 @@ const factoriesData = [
   {
     id: "1",
     name: "Bind Chocolate",
-    category: "Chocolates",
-    subCategories: ["Chocolate Bars", "Truffles", "Luxury"],
     averageCostPerUnit: "$3.50",
     description: {
-      luxury:
-        "Bind’s Luxury Selection features handcrafted premium chocolates presented in elegant packaging, making them perfect for gifting. These chocolates include jewel-like pralines, heart-shaped chocolate collections, and decorative table-box assortments. Made with 100% cocoa butter, these chocolates offer a smooth texture and indulgent taste, designed for those who appreciate fine chocolate artistry.",
-      truffles:
-        "The Truffle Collection includes artisan-crafted milk, dark, and white chocolate truffles filled with rich ganache flavors like hazelnut, raspberry, and coffee. These truffles are carefully made using high-quality ingredients and traditional techniques, offering a velvety melt-in-your-mouth experience. Packaged in sophisticated boxes, they are ideal for both personal indulgence and luxury gifts.",
-      bars:
-        "A wide range of milk, dark, and filled chocolate bars infused with flavors such as pistachio, orange, chili, and gianduja. These bars balance classic chocolate taste with modern flavors, catering to all palates. Additionally, Bind offers chocolate-covered snacks, including pretzels, marshmallows, and cornflakes, creating a delightful mix of crunchy and creamy textures.",
+      // General description shown by default (viewIndex = -1)
       general:
-        "Bind Chocolate, established in 1971, is a premium Turkish chocolatier that blends traditional craftsmanship with modern techniques. Inspired by European chocolate-making traditions from Germany, Switzerland, and Belgium, Bind offers a diverse range of high-quality chocolates made exclusively with cocoa butter—free from other vegetable fats. With a 14,000 m² state-of-the-art facility, Bind Chocolate ensures top-tier quality from raw material selection to final packaging. The brand is renowned for its boutique-style offerings and specialty chocolates, catering to both retail and wholesale markets. Whether indulging in a luxurious gift box or enjoying a simple chocolate bar, Bind delivers exceptional taste and quality across all its product lines.",
+        "Bind Chocolate, established in 1971, is a premium Turkish chocolatier that blends traditional craftsmanship with modern techniques. Inspired by European traditions, Bind offers a diverse range of high-quality chocolates made exclusively with cocoa butter.",
+      // categoryDescriptions is now an array where each element represents one category.
+      // Each category contains a categoryName and an array of subcategoryDescriptions.
+      categoryDescriptions: [
+        {
+          categoryName: "Chocolates",
+          subcategoryDescriptions: [
+            {
+              title: "Luxury Selection",
+              content:
+                "Bind’s Luxury Selection features handcrafted premium chocolates presented in elegant packaging, making them perfect for gifting. These chocolates include jewel-like pralines, heart-shaped collections, and decorative assortments.",
+            },
+            {
+              title: "Truffles",
+              content:
+                "The Truffle Collection includes artisan-crafted milk, dark, and white chocolate truffles filled with rich ganache flavors like hazelnut, raspberry, and coffee.",
+            },
+            {
+              title: "Chocolate Bars & Snacks",
+              content:
+                "A wide range of milk, dark, and filled chocolate bars infused with flavors such as pistachio, orange, chili, and gianduja. Chocolate-covered snacks like pretzels, marshmallows, and cornflakes add a delightful mix of textures.",
+            },
+          ],
+        },
+        {
+          categoryName: "Sweets",
+          subcategoryDescriptions: [
+            {
+              title: "Chocolate-Covered Biscuits",
+              content:
+                "Bind Chocolate offers crispy biscuits coated in rich milk or dark chocolate, creating a satisfying crunch with every bite. These treats provide the perfect balance of buttery biscuit texture and smooth chocolate, making them ideal for tea-time snacks or on-the-go indulgence.",
+            },
+            {
+              title: "Chocolate-Coated Cornflakes",
+              content:
+                "A delightful fusion of crispy cornflakes and creamy chocolate, these bite-sized treats offer a unique mix of textures. Available in milk chocolate and cocoa powder-coated varieties, they cater to those who enjoy light yet indulgent snacking options.",
+            },
+            {
+              title: "ChocoBomb Collection (Marshmallow Treats)",
+              content:
+                "Soft and fluffy marshmallows dipped in rich chocolate, available in milk and dark chocolate variations, with caramel or classic flavors. These treats are perfect for gifting or enjoying as a nostalgic snack. The ChocoBomb Collection is designed to appeal to both children and adults looking for a fun and flavorful chocolate-covered delight.",
+            },
+          ],
+        },
+      ],
     },
-    images: [placeholderImage1, placeholderImage2, placeholderImage3, placeholderImage4], // Used for the detail page slideshow
+    images: [placeholderImage1, placeholderImage2, placeholderImage3, placeholderImage4],
   },
-  // You can add more factory objects here as needed...
+  // ...Add other factories here if needed, ensuring each one has the same structure.
 ];
 
 export default factoriesData;
