@@ -16,6 +16,8 @@ function Factories() {
   const [selectedCountries, setSelectedCountries] = React.useState([]);
   const [avgPPUMin, setAvgPPUMin] = React.useState("");
   const [avgPPUMax, setAvgPPUMax] = React.useState("");
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = 9;
 
   // --- UPDATED DUMMY DATA (15 factories) ---
   const factoryData = [
@@ -192,6 +194,11 @@ function Factories() {
     }
     return true;
   });
+
+  const indexOfLastFactory = currentPage * itemsPerPage;
+  const indexOfFirstFactory = indexOfLastFactory - itemsPerPage;
+  const currentFactories = filteredFactories.slice(indexOfFirstFactory, indexOfLastFactory);
+  const totalPages = Math.ceil(filteredFactories.length / itemsPerPage);
 
   // --- STYLE DEFINITIONS ---
   const mainStyle = {
@@ -463,7 +470,7 @@ function Factories() {
   //Factory tiles container
   const tilesContainerStyle = {
     display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
     gap: "2rem",
   };
 
@@ -493,6 +500,36 @@ function Factories() {
       background-color: #d1d5db;
     }
   `;
+
+  // Add this to your style definitions
+  const paginationContainerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "2rem",
+    gap: "0.5rem",
+  };
+
+  const pageButtonStyle = {
+    padding: "0.5rem 1rem",
+    border: "1px solid #e5e7eb",
+    borderRadius: "0.375rem",
+    backgroundColor: "white",
+    cursor: "pointer",
+    transition: "all 0.2s",
+    color: "#374151",
+  };
+
+  const activePageButtonStyle = {
+    ...pageButtonStyle,
+    backgroundColor: "#16a34a",
+    color: "white",
+    borderColor: "#16a34a",
+  };
+
+  const pageButtonHoverStyle = {
+    backgroundColor: "#f3f4f6",
+  };
 
   // --- HANDLERS ---
   const handleInputChange = function (e) { setSearchTerm(e.target.value); };
@@ -686,7 +723,7 @@ function Factories() {
   const filterPanel = React.createElement("div", { style: filterPanelStyle }, filterPanelContent);
 
   // --- CREATE THE FACTORY TILES (each wrapped in a clickable Link) ---
-  const tileElements = filteredFactories.map(function (factory) {
+  const tileElements = currentFactories.map(function (factory) {
     return React.createElement(Link, { 
       key: factory.id, 
       to: `/factory/${factory.id}`,
@@ -786,11 +823,66 @@ function Factories() {
     "Chat with Harv"
   );
 
+  // Create pagination controls component
+  const createPaginationControls = () => {
+    const pages = [];
+    
+    // Previous button
+    pages.push(
+      React.createElement("button", {
+        key: "prev",
+        onClick: () => setCurrentPage(prev => Math.max(prev - 1, 1)),
+        disabled: currentPage === 1,
+        style: {
+          ...pageButtonStyle,
+          opacity: currentPage === 1 ? 0.5 : 1,
+        },
+      }, "←")
+    );
+
+    // Page numbers
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(
+        React.createElement("button", {
+          key: i,
+          onClick: () => setCurrentPage(i),
+          style: currentPage === i ? activePageButtonStyle : pageButtonStyle,
+          onMouseEnter: (e) => {
+            if (currentPage !== i) {
+              e.currentTarget.style.backgroundColor = pageButtonHoverStyle.backgroundColor;
+            }
+          },
+          onMouseLeave: (e) => {
+            if (currentPage !== i) {
+              e.currentTarget.style.backgroundColor = "white";
+            }
+          },
+        }, i)
+      );
+    }
+
+    // Next button
+    pages.push(
+      React.createElement("button", {
+        key: "next",
+        onClick: () => setCurrentPage(prev => Math.min(prev + 1, totalPages)),
+        disabled: currentPage === totalPages,
+        style: {
+          ...pageButtonStyle,
+          opacity: currentPage === totalPages ? 0.5 : 1,
+        },
+      }, "→")
+    );
+
+    return React.createElement("div", { style: paginationContainerStyle }, pages);
+  };
+
   // --- ASSEMBLE THE CONTENT CONTAINER ---
   const contentContainer = React.createElement("div", { style: contentContainerStyle },
     filterPanel,
     React.createElement("div", { style: mainContentStyle },
-      tilesContainer
+      tilesContainer,
+      createPaginationControls()
     )
   );
 
