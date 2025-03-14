@@ -195,11 +195,19 @@ function Factories() {
 
   // --- STYLE DEFINITIONS ---
   const mainStyle = {
-    background: "linear-gradient(to bottom, #facc15, #ffffff)",
+    background: `
+      linear-gradient(180deg, 
+        rgba(240, 253, 244, 0.8) 0%,
+        rgba(240, 253, 244, 0.4) 200px,
+        rgba(240, 253, 244, 0.2) 400px
+      ),
+      radial-gradient(circle at 20% 0%, #dcfce7 0%, transparent 25%),
+      radial-gradient(circle at 80% 0%, #dcfce7 0%, transparent 25%),
+      #f8faf8
+    `,
+    backgroundRepeat: "no-repeat",
     minHeight: "100vh",
-    paddingTop: "6rem",
-    paddingLeft: "2rem",
-    paddingRight: "2rem",
+    padding: "2rem",
   };
   const titleStyle = {
     textAlign: "center",
@@ -208,6 +216,9 @@ function Factories() {
     color: "black",
     margin: "0 auto 1rem",
     maxWidth: "800px",
+  };
+  const coloredTitleStyle = {
+    color: "#16a34a",
   };
   const subtitleStyle = {
     textAlign: "center",
@@ -221,19 +232,22 @@ function Factories() {
   const searchContainerStyle = {
     display: "flex",
     justifyContent: "center",
-    marginBottom: "2rem",
+    marginBottom: "3rem",
+    maxWidth: "800px",
+    margin: "0 auto",
   };
   const searchBoxStyle = {
     position: "relative",
     width: "100%",
-    maxWidth: "500px",
+    marginLeft: "0",
   };
   const inputStyle = {
     width: "100%",
-    padding: "0.75rem 3rem 0.75rem 1rem",
-    border: "1px solid lightgray",
+    padding: "0.75rem 3rem 0.75rem 1.5rem",
+    border: "1px solid #e5e7eb",
     borderRadius: "9999px",
     fontSize: "1rem",
+    backgroundColor: "white",
   };
   const searchIconButtonStyle = {
     position: "absolute",
@@ -252,12 +266,12 @@ function Factories() {
 
   // Factory tile styles
   const tileStyle = {
-    width: "250px",
-    height: "350px",
-    border: "1px solid #ccc",
+    width: "100%",
+    height: "250px",
+    border: "1px solid #e5e7eb",
     borderRadius: "8px",
     overflow: "hidden",
-    backgroundColor: "white",
+    backgroundColor: "#f9fafb",
     display: "flex",
     flexDirection: "column",
   };
@@ -304,15 +318,25 @@ function Factories() {
     display: "flex",
     alignItems: "center",
   };
-  const ppuLabelStyle = {
-    fontSize: "1rem",
-    color: "black",
-    marginRight: "0.5rem",
+
+  const ppuContainerStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.25rem",
+    color: "#666",
+    fontSize: "0.875rem",
+    fontWeight: "600",
+    padding: "0.5rem 1rem",
+    borderTop: "1px solid #e5e7eb",
+    backgroundColor: "white",
+    position: "sticky",
+    bottom: 0,
+    marginTop: "auto",
   };
+
   const ppuPriceStyle = {
-    fontSize: "1.25rem",
-    fontWeight: "bold",
-    color: "black",
+    color: "#16a34a",
+    fontWeight: "500",
   };
 
   // --- GRID LAYOUT FOR CONTENT ---
@@ -320,63 +344,155 @@ function Factories() {
   // - Left: Filter panel (fixed width: 220px)
   // - Right: Factory tiles container
   const contentContainerStyle = {
-    display: "grid",
-    gridTemplateColumns: "220px 1fr",
-    columnGap: "2rem",
-    width: "100%",
+    display: "flex",
+    gap: "3rem",
+    maxWidth: "1200px",
+    margin: "0 auto",
+    marginTop: "3rem",
   };
 
-  // Filter panel styles: remains in the left grid cell.
+  // Left sidebar styles
   const filterPanelStyle = {
     width: "220px",
+    flexShrink: 0,
+    marginLeft: "-2rem",
   };
 
-  // Tiles container: update to use a grid that displays exactly 3 factory entries per row.
-  const tilesContainerStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 250px)",
-    gap: "1rem",
-    justifyContent: "center",
-    marginRight: "250px",
+  const filterSectionStyle = {
+    marginBottom: "1rem",
   };
 
-  // Horizontal rule style between filter sections
-  const hrStyle = {
-    border: "none",
-    borderBottom: "1px solid lightgrey",
-    margin: "0.5rem 0",
-  };
-
-  // Dropdown header style with arrow placement
-  const dropdownHeaderStyle = {
-    cursor: "pointer",
+  const filterHeaderStyle = {
+    fontSize: "1rem",
     fontWeight: "bold",
-    marginBottom: "0.5rem",
+    marginBottom: "0.75rem",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+    cursor: "pointer",
   };
-  const dropdownContentStyle = { paddingLeft: "0.5rem", marginBottom: "0.5rem" };
-  const optionContainerStyle = { display: "flex", alignItems: "center", marginBottom: "0.5rem", cursor: "pointer" };
-  const checkboxUnselectedStyle = { width: "16px", height: "16px", border: "1px solid gray", marginRight: "0.5rem" };
-  const checkboxSelectedStyle = {
-    width: "16px",
-    height: "16px",
-    backgroundColor: "green",
+
+  // Right content area styles
+  const mainContentStyle = {
+    flex: 1,
+  };
+
+  const factoryCardStyle = {
+    backgroundColor: "white",
+    borderRadius: "8px",
+    overflow: "hidden",
+    border: "1px solid #e5e7eb",
+    height: "420px",
+    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    cursor: "pointer",
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: "0.5rem",
-    color: "white",
-    fontSize: "12px",
+    flexDirection: "column",
+    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
   };
-  const inputAvgStyle = {
-    width: "80px",
-    padding: "0.25rem",
-    border: "1px solid lightgray",
-    borderRadius: "4px",
+
+  // Fixed image container
+  const cardImageContainerStyle = {
+    padding: "0.75rem",
+    backgroundColor: "white",
+    width: "100%",
+    height: "200px",
+    flexShrink: 0,
+  };
+
+  const cardImageStyle = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    borderRadius: "6px",
+  };
+
+  // Fixed title section
+  const cardHeaderStyle = {
+    padding: "0rem 1rem 1rem 1rem",
+    borderBottom: "1px solid #e5e7eb",
+    flexShrink: 0,
+  };
+
+  const cardTitleStyle = {
+    fontSize: "1.25rem",
+    fontWeight: "600",
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+  };
+
+  // Scrollable content section
+  const cardContentStyle = {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    overflow: "hidden",
+    paddingTop: "0.75rem",
+  };
+
+  const cardScrollableContent = {
+    padding: "0 1rem",
+    overflowY: "auto",
+    flex: 1,
+    marginBottom: "0.5rem",
+  };
+
+  // Card content layout styles
+  const cardCountryStyle = {
     fontSize: "1rem",
+    color: "#666",
+    marginBottom: "0.25rem",
+    fontWeight: "600",
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
   };
+
+  const cardCategoriesStyle = {
+    fontSize: "0.75rem",
+    color: "#666",
+    marginBottom: "0.25rem",
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    lineHeight: "1.4",
+  };
+
+  const cardSubcategoriesStyle = {
+    fontSize: "0.75rem",
+    color: "#666",
+    marginBottom: "0.75rem",
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    lineHeight: "1.4",
+  };
+
+  //Factory tiles container
+  const tilesContainerStyle = {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "2rem",
+  };
+
+  // Checkbox label style
+  const checkboxLabelStyle = {
+    marginLeft: "0.75rem",
+  };
+
+  // Add a new style for the scrollable filter options container
+  const filterOptionsContainerStyle = {
+    maxHeight: "250px", // Shows about 10 items
+    overflowY: "auto",
+    paddingRight: "10px",
+    marginBottom: "0.5rem",
+  };
+
+  // Add scrollbar styles for the filter sections
+  const filterScrollbarStyles = `
+    .filter-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .filter-scroll::-webkit-scrollbar-thumb {
+      background-color: #e5e7eb;
+      border-radius: 4px;
+    }
+    .filter-scroll::-webkit-scrollbar-thumb:hover {
+      background-color: #d1d5db;
+    }
+  `;
 
   // --- HANDLERS ---
   const handleInputChange = function (e) { setSearchTerm(e.target.value); };
@@ -415,7 +531,7 @@ function Factories() {
   const searchInput = React.createElement("input", {
     id: "searchInput",
     type: "text",
-    placeholder: "Search for factories or categories",
+    placeholder: "Search for factories or categories (e.g., snacks, beverages, spices)",
     style: inputStyle,
     value: searchTerm,
     onChange: handleInputChange,
@@ -443,70 +559,124 @@ function Factories() {
 
   // --- CREATE THE FILTER PANEL ---
   const categoryArrow = React.createElement("span", { style: { color: "grey", marginLeft: "0.5rem" } }, showCategory ? "▼" : "►");
-  const categoryHeader = React.createElement("div", { style: dropdownHeaderStyle, onClick: toggleShowCategory },
+  const categoryHeader = React.createElement("div", { style: filterHeaderStyle, onClick: toggleShowCategory },
     React.createElement("span", null, "By Category"),
     categoryArrow
   );
   let categoryOptions = null;
   if (showCategory) {
-    categoryOptions = availableCategories.map(function (option) {
-      return React.createElement("div", { style: optionContainerStyle, onClick: function () { toggleCategory(option); } },
-        React.createElement("div", { style: selectedCategories.includes(option) ? checkboxSelectedStyle : checkboxUnselectedStyle },
-          selectedCategories.includes(option) ? "✓" : ""
-        ),
-        option
-      );
-    });
-    categoryOptions = React.createElement("div", { style: dropdownContentStyle }, categoryOptions);
+    categoryOptions = React.createElement("div", 
+      { 
+        style: filterOptionsContainerStyle,
+        className: "filter-scroll"
+      },
+      availableCategories.map(function (option) {
+        return React.createElement("div", 
+          { 
+            style: { 
+              marginBottom: "0.5rem", 
+              display: "flex", 
+              alignItems: "center" 
+            } 
+          },
+          React.createElement("input", { 
+            type: "checkbox", 
+            id: option,
+            checked: selectedCategories.includes(option),
+            onChange: () => toggleCategory(option),
+          }),
+          React.createElement("label", { 
+            htmlFor: option, 
+            style: checkboxLabelStyle 
+          }, option)
+        );
+      })
+    );
   }
-  const categorySection = React.createElement("div", null, categoryHeader, categoryOptions);
+  const categorySection = React.createElement("div", { style: filterSectionStyle }, categoryHeader, categoryOptions);
 
   const subcategoryArrow = React.createElement("span", { style: { color: "grey", marginLeft: "0.5rem" } }, showSubcategory ? "▼" : "►");
-  const subcategoryHeader = React.createElement("div", { style: dropdownHeaderStyle, onClick: toggleShowSubcategory },
+  const subcategoryHeader = React.createElement("div", { style: filterHeaderStyle, onClick: toggleShowSubcategory },
     React.createElement("span", null, "By Subcategory"),
     subcategoryArrow
   );
   let subcategoryOptions = null;
   if (showSubcategory) {
-    subcategoryOptions = availableSubcategories.map(function (option) {
-      return React.createElement("div", { style: optionContainerStyle, onClick: function () { toggleSubcategory(option); } },
-        React.createElement("div", { style: selectedSubcategories.includes(option) ? checkboxSelectedStyle : checkboxUnselectedStyle },
-          selectedSubcategories.includes(option) ? "✓" : ""
-        ),
-        option
-      );
-    });
-    subcategoryOptions = React.createElement("div", { style: dropdownContentStyle }, subcategoryOptions);
+    subcategoryOptions = React.createElement("div",
+      {
+        style: filterOptionsContainerStyle,
+        className: "filter-scroll"
+      },
+      availableSubcategories.map(function (option) {
+        return React.createElement("div",
+          {
+            style: {
+              marginBottom: "0.5rem",
+              display: "flex",
+              alignItems: "center"
+            }
+          },
+          React.createElement("input", {
+            type: "checkbox",
+            id: option,
+            checked: selectedSubcategories.includes(option),
+            onChange: () => toggleSubcategory(option),
+          }),
+          React.createElement("label", {
+            htmlFor: option,
+            style: checkboxLabelStyle
+          }, option)
+        );
+      })
+    );
   }
-  const subcategorySection = React.createElement("div", null, subcategoryHeader, subcategoryOptions);
+  const subcategorySection = React.createElement("div", { style: filterSectionStyle }, subcategoryHeader, subcategoryOptions);
 
   const countryArrow = React.createElement("span", { style: { color: "grey", marginLeft: "0.5rem" } }, showCountry ? "▼" : "►");
-  const countryHeader = React.createElement("div", { style: dropdownHeaderStyle, onClick: toggleShowCountry },
+  const countryHeader = React.createElement("div", { style: filterHeaderStyle, onClick: toggleShowCountry },
     React.createElement("span", null, "By Country"),
     countryArrow
   );
   let countryOptions = null;
   if (showCountry) {
-    countryOptions = availableCountries.map(function (option) {
-      return React.createElement("div", { style: optionContainerStyle, onClick: function () { toggleCountry(option); } },
-        React.createElement("div", { style: selectedCountries.includes(option) ? checkboxSelectedStyle : checkboxUnselectedStyle },
-          selectedCountries.includes(option) ? "✓" : ""
-        ),
-        option
-      );
-    });
-    countryOptions = React.createElement("div", { style: dropdownContentStyle }, countryOptions);
+    countryOptions = React.createElement("div",
+      {
+        style: filterOptionsContainerStyle,
+        className: "filter-scroll"
+      },
+      availableCountries.map(function (option) {
+        return React.createElement("div",
+          {
+            style: {
+              marginBottom: "0.5rem",
+              display: "flex",
+              alignItems: "center"
+            }
+          },
+          React.createElement("input", {
+            type: "checkbox",
+            id: option,
+            checked: selectedCountries.includes(option),
+            onChange: () => toggleCountry(option),
+          }),
+          React.createElement("label", {
+            htmlFor: option,
+            style: checkboxLabelStyle
+          }, option)
+        );
+      })
+    );
   }
-  const countrySection = React.createElement("div", null, countryHeader, countryOptions);
+  const countrySection = React.createElement("div", { style: filterSectionStyle }, countryHeader, countryOptions);
 
   const avgPPUHeader = React.createElement("div", { style: { fontWeight: "bold", marginBottom: "0.5rem" } }, "By Average PPU");
   const avgPPUInputs = React.createElement("div", { style: { display: "flex", gap: "0.5rem" } },
-    React.createElement("input", { type: "text", placeholder: "Min", value: avgPPUMin, onChange: handleAvgPPUMinChange, style: inputAvgStyle }),
-    React.createElement("input", { type: "text", placeholder: "Max", value: avgPPUMax, onChange: handleAvgPPUMaxChange, style: inputAvgStyle })
+    React.createElement("input", { type: "text", placeholder: "Min", value: avgPPUMin, onChange: handleAvgPPUMinChange, style: inputStyle }),
+    React.createElement("input", { type: "text", placeholder: "Max", value: avgPPUMax, onChange: handleAvgPPUMaxChange, style: inputStyle })
   );
-  const avgPPUSection = React.createElement("div", null, avgPPUHeader, avgPPUInputs);
+  const avgPPUSection = React.createElement("div", { style: filterSectionStyle }, avgPPUHeader, avgPPUInputs);
 
-  const hrElement = React.createElement("hr", { style: hrStyle });
+  const hrElement = React.createElement("hr", { style: { border: "none", borderBottom: "1px solid lightgrey", margin: "0.5rem 0" } });
   const filterPanelContent = React.createElement("div", null,
     categorySection, hrElement,
     subcategorySection, hrElement,
@@ -517,31 +687,63 @@ function Factories() {
 
   // --- CREATE THE FACTORY TILES (each wrapped in a clickable Link) ---
   const tileElements = filteredFactories.map(function (factory) {
-    const imagePlaceholder = React.createElement("img", {
-        src: factory.image,
-        alt: factory.name,
-        style: tileImageStyle,
-      });
-    const factoryName = React.createElement("div", { style: tileNameStyle }, factory.name);
-    const factoryCountry = React.createElement("div", { style: tileCountryStyle }, factory.country);
-    const factoryCategories = React.createElement("div", { style: tileCategoriesStyle }, "Categories: " + factory.categories.join(", "));
-    const factorySubcategories = React.createElement("div", { style: tileSubcategoriesStyle }, "Subcategories: " + factory.subcategories.join(", "));
-    const avgPPULabel = React.createElement("span", { style: ppuLabelStyle }, "Average PPU:");
-    const avgPPUPrice = React.createElement("span", { style: ppuPriceStyle }, " " + factory.avgPPU);
-    const avgPPURow = React.createElement("div", { style: infoPPUStyle }, avgPPULabel, avgPPUPrice);
-    const infoContainer = React.createElement("div", { style: tileInfoStyle, className: "tile-info" },
-      factoryName,
-      factoryCountry,
-      factoryCategories,
-      factorySubcategories,
-      avgPPURow
+    return React.createElement(Link, { 
+      key: factory.id, 
+      to: `/factory/${factory.id}`,
+      style: { 
+        textDecoration: "none", 
+        color: "inherit",
+        display: "block",
+      }
+    }, 
+      React.createElement("div", { 
+        style: factoryCardStyle,
+        onMouseEnter: (e) => {
+          e.currentTarget.style.transform = "scale(1.02)";
+          e.currentTarget.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
+        },
+        onMouseLeave: (e) => {
+          e.currentTarget.style.transform = "scale(1)";
+          e.currentTarget.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.1)";
+        },
+      },
+        // Fixed image section
+        React.createElement("div", { style: cardImageContainerStyle },
+          React.createElement("img", {
+            src: factory.image,
+            alt: factory.name,
+            style: cardImageStyle,
+          })
+        ),
+        // Fixed title section
+        React.createElement("div", { style: cardHeaderStyle },
+          React.createElement("div", { style: cardTitleStyle }, factory.name)
+        ),
+        // Scrollable content section
+        React.createElement("div", { style: cardContentStyle },
+          React.createElement("div", { style: cardScrollableContent },
+            React.createElement("div", { style: cardCountryStyle }, factory.country),
+            React.createElement("div", { style: cardCategoriesStyle }, 
+              React.createElement("strong", null, "Categories: "),
+              factory.categories.join(", ")
+            ),
+            React.createElement("div", { style: cardSubcategoriesStyle }, 
+              React.createElement("strong", null, "Subcategories: "),
+              factory.subcategories.join(", ")
+            )
+          ),
+          // PPU section outside the scrollable area
+          React.createElement("div", { style: ppuContainerStyle },
+            "Average PPU: ",
+            React.createElement("span", { style: ppuPriceStyle }, factory.avgPPU)
+          )
+        )
+      )
     );
-    const tileDiv = React.createElement("div", { style: tileStyle }, imagePlaceholder, infoContainer);
-    return React.createElement(Link, { key: factory.id, to: `/factory/${factory.id}`, style: { textDecoration: "none", color: "inherit" } }, tileDiv);
   });
   const tilesContainer = React.createElement("div", { style: tilesContainerStyle }, tileElements);
 
-  // --- ADD SCROLLBAR STYLES FOR THE TILE INFO ---
+  // --- ADD SCROLLBAR STYLES ---
   const scrollbarStyles = `
     .tile-info::-webkit-scrollbar {
       width: 6px;
@@ -587,15 +789,29 @@ function Factories() {
   // --- ASSEMBLE THE CONTENT CONTAINER ---
   const contentContainer = React.createElement("div", { style: contentContainerStyle },
     filterPanel,
-    tilesContainer
+    React.createElement("div", { style: mainContentStyle },
+      tilesContainer
+    )
   );
+
+  // Add this CSS style to the scrollbarStyles string (or create a new style string)
+  const checkboxStyles = `
+    input[type="checkbox"] {
+      accent-color: #16a34a;
+    }
+  `;
 
   return React.createElement(
     "main",
     { style: mainStyle },
     scrollbarStyleTag,
     chatButtonStyleTag,
-    React.createElement("h1", { style: titleStyle }, "Explore Our Trusted Factories"),
+    React.createElement("style", null, checkboxStyles),
+    React.createElement("style", null, filterScrollbarStyles),
+    React.createElement("h1", { style: titleStyle }, 
+      "Explore Our ",
+      React.createElement("span", { style: coloredTitleStyle }, "Trusted Factories")
+    ),
     React.createElement("h2", { style: subtitleStyle }, "Browse through hundreds of manufacturers and find the perfect partner for your brand."),
     searchContainer,
     contentContainer,
