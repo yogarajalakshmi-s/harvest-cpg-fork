@@ -1,0 +1,250 @@
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 80px;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.categoryButton {
+  padding: 10px 20px;
+  border: 1px solid #008000;
+  border-radius: 24px;
+  background-color: white;
+  color: #008000;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 12px;
+  transition: all 0.2s;
+}
+
+.categoryButton:hover {
+  background-color: #008000;
+  color: white;
+}
+
+.mainContent {
+  display: flex;
+  gap: 48px;
+  min-height: 600px;
+}
+
+.imageColumn {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentColumn {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainImageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fullscreenButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.thumbnailsContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  padding: 0 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.thumbnail {
+  width: 120px;
+  height: 90px;
+  border-radius: 4px;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid transparent;
+}
+
+.thumbnailSelected {
+  composes: thumbnail;
+  border-color: #008000;
+}
+
+.arrowButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #374151;
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.arrowButtonLeft {
+  composes: arrowButton;
+  left: 0;
+}
+
+.arrowButtonRight {
+  composes: arrowButton;
+  right: 0;
+}
+
+.contentContainer {
+  background-color: #f0fdf4;
+  border-radius: 16px;
+  padding: 32px 32px 0;
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+}
+
+.cost {
+  font-size: 28px;
+  font-weight: 500;
+  color: #111827;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #ecfdf5;
+}
+
+.scrollableContent {
+  flex: 1;
+  overflow: auto;
+  padding-right: 16px;
+  padding-bottom: 32px;
+}
+
+.categoryTitle {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #111827;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #374151;
+  margin-bottom: 24px;
+}
+
+.shippingButton {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #e6f3e6;
+  color: #008000;
+  border-radius: 24px;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 24px;
+  width: 100%;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.shippingButton:hover {
+  background-color: #008000;
+  color: white;
+}
+
+.fullscreenOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.fullscreenImage {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.buttonContainer {
+  display: flex;
+}
+
+.flexColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.marginAuto {
+  margin-top: auto;
+}
+
+.subcategoryTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+.subcategoryDescription {
+  composes: description;
+  margin-bottom: 32px;
+} 
