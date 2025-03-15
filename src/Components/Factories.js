@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "../styles/Factories.module.css";
 
 const imagesContext = require.context("../Assets", false, /\.(png|jpe?g|svg)$/);
 const allImages = imagesContext.keys().map(imagesContext);
@@ -185,13 +186,9 @@ function Factories() {
     if (selectedCountries.length > 0) {
       if (!selectedCountries.includes(factory.country)) return false;
     }
-    const price = parseFloat(factory.avgPPU.replace("$", ""));
-    if (avgPPUMin !== "" && !isNaN(parseFloat(avgPPUMin))) {
-      if (price < parseFloat(avgPPUMin)) return false;
-    }
-    if (avgPPUMax !== "" && !isNaN(parseFloat(avgPPUMax))) {
-      if (price > parseFloat(avgPPUMax)) return false;
-    }
+    const price = parseFloat(factory.avgPPU.replace(/[^0-9.]/g, ''));
+    if (avgPPUMin && price < avgPPUMin) return false;
+    if (avgPPUMax && price > avgPPUMax) return false;
     return true;
   });
 
@@ -199,6 +196,13 @@ function Factories() {
   const indexOfFirstFactory = indexOfLastFactory - itemsPerPage;
   const currentFactories = filteredFactories.slice(indexOfFirstFactory, indexOfLastFactory);
   const totalPages = Math.ceil(filteredFactories.length / itemsPerPage);
+
+  // First, modify how we calculate min and max PPU
+  const ppuValues = factoryData.map(factory => 
+    parseFloat(factory.avgPPU.replace(/[^0-9.]/g, ''))
+  );
+  const minPPU = Math.floor(Math.min(...ppuValues));
+  const maxPPU = Math.ceil(Math.max(...ppuValues));
 
   // --- STYLE DEFINITIONS ---
   const mainStyle = {
@@ -270,62 +274,6 @@ function Factories() {
     height: "1.5rem",
     fill: "green",
   };
-
-  // Factory tile styles
-  const tileStyle = {
-    width: "100%",
-    height: "250px",
-    border: "1px solid #e5e7eb",
-    borderRadius: "8px",
-    overflow: "hidden",
-    backgroundColor: "#f9fafb",
-    display: "flex",
-    flexDirection: "column",
-  };
-  const tileImageStyle = {
-    height: "50%",
-    backgroundColor: "#e5e7eb",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "0.9rem",
-    color: "#6b7280",
-  };
-  const tileInfoStyle = {
-    height: "50%",
-    padding: "0.5rem",
-    paddingRight: "4px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    overflowY: "auto",
-  };
-  const tileNameStyle = {
-    fontSize: "1.5rem",
-    fontWeight: "bold",
-    margin: "0 0 0.5rem 0",
-  };
-  const tileCountryStyle = {
-    fontSize: "1rem",
-    color: "gray",
-    margin: "0 0 0.25rem 0",
-  };
-  const tileCategoriesStyle = {
-    fontSize: "1rem",
-    color: "gray",
-    margin: "0 0 0.25rem 0",
-  };
-  const tileSubcategoriesStyle = {
-    fontSize: "1rem",
-    color: "gray",
-    margin: "0",
-  };
-  const infoPPUStyle = {
-    marginTop: "0.5rem",
-    display: "flex",
-    alignItems: "center",
-  };
-
   const ppuContainerStyle = {
     display: "flex",
     alignItems: "center",
@@ -402,8 +350,10 @@ function Factories() {
     padding: "0.75rem",
     backgroundColor: "white",
     width: "100%",
-    height: "200px",
+    aspectRatio: "16/9",
     flexShrink: 0,
+    minHeight: "200px",
+    maxHeight: "250px",
   };
 
   const cardImageStyle = {
@@ -706,12 +656,57 @@ function Factories() {
   }
   const countrySection = React.createElement("div", { style: filterSectionStyle }, countryHeader, countryOptions);
 
-  const avgPPUHeader = React.createElement("div", { style: { fontWeight: "bold", marginBottom: "0.5rem" } }, "By Average PPU");
-  const avgPPUInputs = React.createElement("div", { style: { display: "flex", gap: "0.5rem" } },
-    React.createElement("input", { type: "text", placeholder: "Min", value: avgPPUMin, onChange: handleAvgPPUMinChange, style: inputStyle }),
-    React.createElement("input", { type: "text", placeholder: "Max", value: avgPPUMax, onChange: handleAvgPPUMaxChange, style: inputStyle })
+  const avgPPUHeader = React.createElement("div", 
+    { className: styles.filterHeader }, 
+    "By Average PPU"
   );
-  const avgPPUSection = React.createElement("div", { style: filterSectionStyle }, avgPPUHeader, avgPPUInputs);
+
+  const avgPPUSliders = React.createElement("div", 
+    { className: styles.sliderContainer },
+    // Min slider
+    React.createElement("input", {
+      type: "range",
+      min: minPPU,
+      max: maxPPU,
+      step: "0.25",
+      value: avgPPUMin || minPPU,
+      onChange: (e) => {
+        const value = parseFloat(e.target.value);
+        if (value <= (avgPPUMax || maxPPU)) {
+          setAvgPPUMin(value);
+          setCurrentPage(1);
+        }
+      },
+      className: styles.ppuSlider
+    }),
+    // Max slider
+    React.createElement("input", {
+      type: "range",
+      min: minPPU,
+      max: maxPPU,
+      step: "0.25",
+      value: avgPPUMax || maxPPU,
+      onChange: (e) => {
+        const value = parseFloat(e.target.value);
+        if (value >= (avgPPUMin || minPPU)) {
+          setAvgPPUMax(value);
+          setCurrentPage(1);
+        }
+      },
+      className: styles.ppuSlider
+    }),
+    React.createElement("div", 
+      { className: styles.sliderValues },
+      React.createElement("span", null, `$${(avgPPUMin || minPPU).toFixed(2)}`),
+      React.createElement("span", null, `$${(avgPPUMax || maxPPU).toFixed(2)}`)
+    )
+  );
+
+  const avgPPUSection = React.createElement("div", 
+    { className: styles.filterSection }, 
+    avgPPUHeader, 
+    avgPPUSliders
+  );
 
   const hrElement = React.createElement("hr", { style: { border: "none", borderBottom: "1px solid lightgrey", margin: "0.5rem 0" } });
   const filterPanelContent = React.createElement("div", null,
