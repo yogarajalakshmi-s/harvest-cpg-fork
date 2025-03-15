@@ -661,51 +661,51 @@ function Factories() {
     "By Average PPU"
   );
 
-  const avgPPUSliders = React.createElement("div", 
-    { className: styles.sliderContainer },
-    // Min slider
-    React.createElement("input", {
-      type: "range",
-      min: minPPU,
-      max: maxPPU,
-      step: "0.25",
-      value: avgPPUMin || minPPU,
-      onChange: (e) => {
-        const value = parseFloat(e.target.value);
-        if (value <= (avgPPUMax || maxPPU)) {
-          setAvgPPUMin(value);
-          setCurrentPage(1);
-        }
-      },
-      className: styles.ppuSlider
-    }),
-    // Max slider
-    React.createElement("input", {
-      type: "range",
-      min: minPPU,
-      max: maxPPU,
-      step: "0.25",
-      value: avgPPUMax || maxPPU,
-      onChange: (e) => {
-        const value = parseFloat(e.target.value);
-        if (value >= (avgPPUMin || minPPU)) {
-          setAvgPPUMax(value);
-          setCurrentPage(1);
-        }
-      },
-      className: styles.ppuSlider
-    }),
-    React.createElement("div", 
-      { className: styles.sliderValues },
-      React.createElement("span", null, `$${(avgPPUMin || minPPU).toFixed(2)}`),
-      React.createElement("span", null, `$${(avgPPUMax || maxPPU).toFixed(2)}`)
-    )
-  );
-
   const avgPPUSection = React.createElement("div", 
-    { className: styles.filterSection }, 
-    avgPPUHeader, 
-    avgPPUSliders
+    { className: styles.filterSection },
+    React.createElement("div", { className: styles.filterHeader }, 
+      "By Average PPU"
+    ),
+    React.createElement("div", 
+      { className: styles.sliderContainer },
+      // First slider (min value)
+      React.createElement("input", {
+        type: "range",
+        min: minPPU,
+        max: maxPPU,
+        value: avgPPUMin || minPPU,
+        step: "0.25",
+        onChange: (e) => {
+          const value = parseFloat(e.target.value);
+          if (value <= (avgPPUMax || maxPPU)) {
+            setAvgPPUMin(value);
+            setCurrentPage(1);
+          }
+        },
+        className: styles.slider
+      }),
+      // Second slider (max value)
+      React.createElement("input", {
+        type: "range",
+        min: minPPU,
+        max: maxPPU,
+        value: avgPPUMax || maxPPU,
+        step: "0.25",
+        onChange: (e) => {
+          const value = parseFloat(e.target.value);
+          if (value >= (avgPPUMin || minPPU)) {
+            setAvgPPUMax(value);
+            setCurrentPage(1);
+          }
+        },
+        className: styles.slider
+      }),
+      React.createElement("div", 
+        { className: styles.sliderValues },
+        React.createElement("span", null, `$${(avgPPUMin || minPPU).toFixed(2)}`),
+        React.createElement("span", null, `$${(avgPPUMax || maxPPU).toFixed(2)}`)
+      )
+    )
   );
 
   const hrElement = React.createElement("hr", { style: { border: "none", borderBottom: "1px solid lightgrey", margin: "0.5rem 0" } });

@@ -87,17 +87,15 @@
 }
 
 .filterSection {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .filterHeader {
   font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
+  margin-bottom: 1rem;
+  color: #000000;
 }
 
 .mainContent {
@@ -250,44 +248,39 @@
 }
 
 .sliderContainer {
-  padding: 0 10px;
-  position: relative;
-  margin-bottom: 30px;
-}
-
-.ppuSlider {
   width: 100%;
-  height: 4px;
-  -webkit-appearance: none;
-  background: #e5e7eb;
-  border-radius: 2px;
-  outline: none;
-  margin: 15px 0;
-  pointer-events: none;
+  position: relative;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.slider {
   position: absolute;
-}
-
-.ppuSlider::-webkit-slider-thumb {
+  width: 100%;
+  pointer-events: none;
   -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  background: #16a34a;
-  border-radius: 50%;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: background 0.2s;
+  height: 1px;
+  background: #d1d5db;
+  top: 0;
 }
 
-.ppuSlider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  background: #16a34a;
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: auto;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
+  background: #16a34a;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #16a34a;
   cursor: pointer;
   border: none;
-  pointer-events: auto;
-  transition: background 0.2s;
 }
 
 .sliderValues {
@@ -296,37 +289,13 @@
   color: #000000;
   font-size: 0.875rem;
   font-weight: 500;
-  position: absolute;
-  width: 100%;
-  top: 30px;
-  left: 0;
-  padding: 0 10px;
+  margin-top: 15px;
+  padding: 5px 0px 0px 0px;
 }
 
-.sliderValues span {
-  transform: translateX(-50%);
-  position: absolute;
-}
-
-.sliderValues span:first-child {
-  left: 0;
-  transform: translateX(0);
-}
-
-.sliderValues span:last-child {
-  right: 0;
-  transform: translateX(0);
-}
-
-/* Make the second slider overlay the first one */
-.ppuSlider:nth-child(1) {
-  background: #e5e7eb;
-  z-index: 1;
-}
-
-.ppuSlider:nth-child(2) {
-  background: #16a34a;
-  z-index: 2;
+/* Add this to style the active range between handles */
+.slider:nth-child(2) {
+  background: #16a34a; /* green track for the active range */
 }
 
 @media screen and (max-width: 1200px) {
